@@ -5,6 +5,7 @@
 #include <math.h>
 
 #define LINE_LENGTH 1024
+#define MAX_CONG_DIST 53 // California has 53
 // IUGG mean earth radius in kilometers, from
 // https://en.wikipedia.org/wiki/Earth_radius#Mean_radius.  Using a
 // sphere with this radius results in an error of up to about 0.5%.
@@ -25,7 +26,7 @@ double dist(double th1, double ph1, double th2, double ph2)
 }
 
 int calculate_mean_distances(int N,
-  double* lat, double* lon, double* membership, double* population)
+  double* lat, double* lon, int* membership, double* population)
 {
   int i, j, counter = 0;
   double sum_dist;
@@ -46,30 +47,27 @@ int calculate_mean_distances(int N,
   }
   return sum_dist / N_unique_pairs;
 }
-void get_N_clusters(char* line, int num, int membership_column, double* membership)
+void get_membership(char* line, int num, int membership_column, int* membership)
 {
   const char* tok;
-  for (tok = strtok(line, ",");
-          tok && *tok;
-          tok = strtok(NULL, ",\n"))
+  for (tok = strtok(line, ","); tok && *tok; tok = strtok(NULL, ",\n"))
   {
     if (!--membership_column) // if we are at position for membership
     {
-      membership[num] = strtof(tok,0);
-      printf("%f\n", membership[num]);
+      membership[num] = atoi(tok);
+      printf("%i\n", membership[num]);
     }
   }
 }
 const char* get_columns(char* line, int num,
-  int column_lat, int column_lon, int membership_column, int population_column,
-  double* lat, double* lon, double* membership, double* population)
+  int column_lat, int column_lon, int population_column,
+  double* lat, double* lon, double* population)
 {
     const char* tok;
     for (tok = strtok(line, ",");
             tok && *tok;
             tok = strtok(NULL, ",\n"))
     {
-
         if (!--column_lat) // if we are at position for latitude
         {
           lat[num] = strtof(tok,0);
@@ -77,11 +75,6 @@ const char* get_columns(char* line, int num,
         if (!--column_lon) // if we are at position for longitude
         {
           lon[num] = strtof(tok,0);
-        }
-        if (!--membership_column) // if we are at position for membership
-        {
-          membership[num] = strtof(tok,0);
-          printf("%f\n", membership[num]);
         }
         if (!--population_column) // if we are at position for population
         {
@@ -93,35 +86,72 @@ const char* get_columns(char* line, int num,
 
 int main()
 {
+    // 1. find the number of blocks in the state
     FILE* stream = fopen("RI.csv", "r");
     char line[1024];
-
-    int counter = 0;
     int lat_column = 4, lon_column = 5,
-      membership_column = 6, population_column = 9;
+      membership_column = 7, population_column = 9;
     int N = -1; // we want to skip first line
     while (fgets(line, LINE_LENGTH, stream))
     {
-
-      N++; // we need to know the number of points/blocks
-
+      N++; // we need to know the number of points/block
 
     }
     printf("%i\n", N);
-    double lon[N], lat[N], membership[N], population[N];
-
+    // 2. find the number of clusters
+    int membership[N];
+    int counter = 0;
     stream = fopen("RI.csv", "r"); // re-open to go back to start of file
-
     while (fgets(line, LINE_LENGTH, stream))
     {
       char* tmp = strdup(line);
-
+      if (counter) // skip first row of csv
+      {
+        get_membership(tmp, counter-1, membership_column, membership);
+      }
       free(tmp);
-      get_N_clusters(tmp, counter-1, membership_column, membership);
-
-
+      counter++;
     }
+    int i, j;
+    printf("Unique Elements\n");
+    int N_clusters = 0;
+    for (i = 0; i < N; i++) // go through every value in the membership_column
+    {
+      for (j = 0; j < i; j++)
+      {
+        if (membership[i] == membership[j])
+        { // duplicate items
+            break;
+        }
+      }
+      if (i == j)
+      {
+        N_clusters++; // find how many are unique
+      }
+    }
+    int clusters[N_clusters];
+    counter = 0;
+    for (i = 0; i < N; i++) // go through every value in the membership_column
+    {
+      for (j = 0; j < i; j++)
+      {
+        if (membership[i] == membership[j])
+        { // duplicate items
+            break;
+        }
+      }
+      if (i == j)
+      {
+        clusters[counter] = membership[i]; // collect them up in order
+        printf("clusters[%i] = %i\n", counter, clusters[counter]);
+        counter++;
+      }
+    }
+    printf("%i\n", N_clusters);
+    exit(0);
     printf("%i\n", N);
+    double lon[N], lat[N], population[N];
+
     stream = fopen("RI.csv", "r"); // re-open to go back to start of file
     while (fgets(line, LINE_LENGTH, stream))
     {
@@ -132,9 +162,9 @@ int main()
           // ,Alpha,Beta,Centroid Latitude,Centroid Longitude,Cluster,Congressional District,GEOID,Predicted 2015 Population
           // We are interested in the 4th, 5th, 6th or 7th, and 9th:
           get_columns(tmp, counter-1,
-            lat_column, lon_column, membership_column, population_column,
-            lat, lon, membership, population);
-          printf("%f,%f,%f,%f\n",
+            lat_column, lon_column, population_column,
+            lat, lon, population);
+          printf("%f,%f,%i,%f\n",
             lat[counter-1],lon[counter-1],
             membership[counter-1], population[counter-1]);
 

@@ -1,3 +1,6 @@
+# CSV files
+*.csv
+
 # Object files
 *.o
 *.ko

@@ -4,6 +4,7 @@
 #include <time.h>
 #include <math.h>
 
+#define LINE_LENGTH 1024
 // IUGG mean earth radius in kilometers, from
 // https://en.wikipedia.org/wiki/Earth_radius#Mean_radius.  Using a
 // sphere with this radius results in an error of up to about 0.5%.
@@ -23,8 +24,45 @@ double dist(double th1, double ph1, double th2, double ph2)
 	return asin(sqrt(dx * dx + dy * dy + dz * dz) / 2) * 2 * R;
 }
 
-const char* get_columns(char* line, int column_lat, int column_lon,
-                                    double* lat, double* lon, int num)
+int calculate_mean_distances(int N,
+  double* lat, double* lon, double* membership, double* population)
+{
+  int i, j, counter = 0;
+  double sum_dist;
+  int N_unique_pairs = (((N - 1)*(N - 1) + (N + 1)) / 2);
+  printf("%i\n", N_unique_pairs);
+  printf("%i\n", N);
+
+
+  for (i = 0; i < N-1; i++)
+  {
+    for (j = i+1; j < N; j++)
+    {
+      sum_dist += dist(lat[i],lon[i],lat[j],lon[j])
+                  * population[i] * population[j];
+      counter++;
+
+    }
+  }
+  return sum_dist / N_unique_pairs;
+}
+void get_N_clusters(char* line, int num, int membership_column, double* membership)
+{
+  const char* tok;
+  for (tok = strtok(line, ",");
+          tok && *tok;
+          tok = strtok(NULL, ",\n"))
+  {
+    if (!--membership_column) // if we are at position for membership
+    {
+      membership[num] = strtof(tok,0);
+      printf("%f\n", membership[num]);
+    }
+  }
+}
+const char* get_columns(char* line, int num,
+  int column_lat, int column_lon, int membership_column, int population_column,
+  double* lat, double* lon, double* membership, double* population)
 {
     const char* tok;
     for (tok = strtok(line, ",");
@@ -34,73 +72,89 @@ const char* get_columns(char* line, int column_lat, int column_lon,
 
         if (!--column_lat) // if we are at position for latitude
         {
-          // printf("%s\n", tok);
           lat[num] = strtof(tok,0);
         }
         if (!--column_lon) // if we are at position for longitude
         {
           lon[num] = strtof(tok,0);
         }
-        // if (!--pos_pop) // if we are at position for population
-        // {
-        //   printf("%s\n", tok);
-        // }
+        if (!--membership_column) // if we are at position for membership
+        {
+          membership[num] = strtof(tok,0);
+          printf("%f\n", membership[num]);
+        }
+        if (!--population_column) // if we are at position for population
+        {
+          population[num] = strtof(tok,0);
+        }
     }
     return NULL;
  }
 
 int main()
 {
-    FILE* stream = fopen("input.csv", "r");
+    FILE* stream = fopen("RI.csv", "r");
     char line[1024];
 
+    int counter = 0;
+    int lat_column = 4, lon_column = 5,
+      membership_column = 6, population_column = 9;
     int N = -1; // we want to skip first line
-    while (fgets(line, 1024, stream))
+    while (fgets(line, LINE_LENGTH, stream))
     {
-      N++;
+
+      N++; // we need to know the number of points/blocks
+
+
     }
     printf("%i\n", N);
-    stream = fopen("input.csv", "r"); // re-open to go back to start of file
+    double lon[N], lat[N], membership[N], population[N];
 
-    double lon[N];
-    double lat[N];
-    int counter = 0;
-    int lat_column = 3, lon_column = 4;
-    while (fgets(line, 1024, stream))
+    stream = fopen("RI.csv", "r"); // re-open to go back to start of file
+
+    while (fgets(line, LINE_LENGTH, stream))
+    {
+      char* tmp = strdup(line);
+
+      free(tmp);
+      get_N_clusters(tmp, counter-1, membership_column, membership);
+
+
+    }
+    printf("%i\n", N);
+    stream = fopen("RI.csv", "r"); // re-open to go back to start of file
+    while (fgets(line, LINE_LENGTH, stream))
     {
         char* tmp = strdup(line);
         if (counter) // skip first row of csv
         {
-          lon[counter-1] = 999.0;
-          get_columns(tmp, lat_column, lon_column, lat, lon, counter-1);
-          // printf("%f,%f\n", lat[counter-1],lon[counter-1]);
+          // Columns/first line has structure:
+          // ,Alpha,Beta,Centroid Latitude,Centroid Longitude,Cluster,Congressional District,GEOID,Predicted 2015 Population
+          // We are interested in the 4th, 5th, 6th or 7th, and 9th:
+          get_columns(tmp, counter-1,
+            lat_column, lon_column, membership_column, population_column,
+            lat, lon, membership, population);
+          printf("%f,%f,%f,%f\n",
+            lat[counter-1],lon[counter-1],
+            membership[counter-1], population[counter-1]);
 
         }
+        // else // this line (the 1st) tells us about what each column is
+        // {
+          // lat_column, lon_column, membership_column, population_column,
+          // NULL; // fill in as appropriate
+        // }
         // NOTE strtok clobbers tmp
         free(tmp);
         counter++;
 
     }
+
     fclose(stream);
-    // Start the actual calculation of distances here:
+    int mean_distances;
+    // Start the (timing of) calculation of distances here:
     clock_t start = clock(), diff;
-
-    int i, j;
-    double d;
-    int N_unique_pairs = (((N - 1)*(N - 1) + (N + 1)) / 2);
-    double sum_dist[N_unique_pairs];
-    counter = 0;
-    for (i = 0; i < N-1; i++)
-    {
-      for (j = i+1; j < N; j++)
-      {
-        sum_dist[counter] = dist(lat[i],lon[i],lat[j],lon[j]);
-        counter++;
-      }
-    }
-    // d = dist(36.12, -86.67, 33.94, -118.4);
-    // printf("dist: %.1f km (%.1f mi.)\n", d, d / 1.609344);
-
+    mean_distances = calculate_mean_distances(N, lat, lon, membership, population);
     diff = clock() - start;
     int msec = diff * 1000 / CLOCKS_PER_SEC;
     printf("Time taken %d seconds %d milliseconds", msec/1000, msec%1000);

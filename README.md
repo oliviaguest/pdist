@@ -5,7 +5,7 @@ This code takes a set of 2D data points ```X``` and calculates the mean of the p
 
 To call use:
 ``` python
-mean_distances = c_mean_dist(X, counts)
+mean_distances = c_mean_dist(X, weights)
 ```
 
 ## Basic Information

@@ -1,5 +1,13 @@
 # pdist
 
+## Usage
+This code takes a set of 2D data points ```X``` and calculates the mean of the pairwise weighted distances between points using the great circle metric.
+
+To call use:
+``` python
+mean_distances = c_mean_dist(X, counts)
+```
+
 ## Basic Information
 The C and Python code were written by Olivia Guest, using https://equatorialmaths.wordpress.com/2010/10/16/python-extensions-with-c-libraries-made-easy-by-cython/ to call C functions from Python.
 

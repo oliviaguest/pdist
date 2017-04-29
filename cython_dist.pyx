@@ -5,11 +5,11 @@ cdef extern from "cdist.h":
 from stdlib cimport *
 
 def cdist(a, b):
-  th1 = a[0]
-  ph1 = a[1]
-  th2 = b[0]
-  ph2 = b[1]
-  d = dist(th1, ph1, th2, ph2)
+  # th1 = a[0]
+  # ph1 = a[1]
+  # th2 = b[0]
+  # ph2 = b[1]
+  d = dist(a[0], a[1], b[0], b[1])
   return d
 
 def c_mean_dist(X, w):

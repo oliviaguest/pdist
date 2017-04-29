@@ -9,6 +9,8 @@ import numpy as np
 
 from time import time
 from scipy.spatial.distance import pdist
+from geopy.distance import great_circle
+
 
 if __name__ == "__main__":
     # Generate some data:
@@ -54,3 +56,11 @@ if __name__ == "__main__":
     # There is minor rounding error, but check for equality:
     assert np.round(scipy_mean) == np.round(c_mean)
     print('mean = {}'.format(c_mean))
+
+    X = [[0, 10], [4, 2]]
+    t = time()
+    print(cdist(X[0], X[1]))
+    print('C:\t\t{} s'.format(time() - t))
+    t = time()
+    print (great_circle(X[0], X[1]))
+    print('C:\t\t{} s'.format(time() - t))

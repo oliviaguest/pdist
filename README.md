@@ -11,6 +11,8 @@ mean_distances = c_mean_dist(X, weights)
 ## Basic Information 
 The C and Python code were written by Olivia Guest, using https://equatorialmaths.wordpress.com/2010/10/16/python-extensions-with-c-libraries-made-easy-by-cython/ to call C functions from Python.
 
+You have to ```make``` and then run ```python compare.py``` to see the comparison between using the C version and using a Python-only way.
+
 If you want to use this function from outside this directory, e.g., ```import```. I have not yet found a way of doing so without adding the path to the library to ```LD_LIBRARY_PATH```, e.g., ```export LD_LIBRARY_PATH=/local/path/to/this/repo```.
 
 ## Background

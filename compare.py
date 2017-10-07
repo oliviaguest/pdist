@@ -1,9 +1,11 @@
+"""Compare C and Python implementations."""
+
 from __future__ import division, print_function
+
 from dist import c_mean_dist
 from dist import cdist
 
 import sklearn.datasets
-import scipy.spatial.distance
 
 import numpy as np
 
@@ -20,12 +22,14 @@ if __name__ == "__main__":
     n_clusters = len(centers)
     n_samples = int(0.75 * N)
     data, labels_true = sklearn.datasets.make_blobs(n_samples=n_samples,
-        centers=centers, cluster_std=cluster_std)
+                                                    centers=centers,
+                                                    cluster_std=cluster_std)
     centers = [[0.5, np.sqrt(0.75)]]
     cluster_std = [0.3]
     n_clusters = len(centers)
     extra, labels_true = sklearn.datasets.make_blobs(n_samples=int(0.25 * N),
-        centers=centers, cluster_std=cluster_std)
+                                                     centers=centers,
+                                                     cluster_std=cluster_std)
     X = np.concatenate((data, extra), axis=0)
     N = X.shape[0]
 
@@ -45,7 +49,6 @@ if __name__ == "__main__":
     scipy_mean = scipy_sum / (((N - 1)**2 + (N + 1)) / 2 + N)
     print('SciPy:\t\t{} s'.format(time() - t))
     ##########################################################################
-
 
     ##########################################################################
     # C & Cython:

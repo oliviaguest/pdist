@@ -60,10 +60,11 @@ if __name__ == "__main__":
     assert np.round(scipy_mean) == np.round(c_mean)
     print('mean = {}'.format(c_mean))
 
+    # Compary to GeoPy:
     X = [[0, 10], [4, 2]]
     t = time()
     print(cdist(X[0], X[1]))
     print('C:\t\t{} s'.format(time() - t))
     t = time()
     print (great_circle(X[0], X[1]))
-    print('C:\t\t{} s'.format(time() - t))
+    print('GeoPy:\t\t{} s'.format(time() - t))

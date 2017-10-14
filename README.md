@@ -3,6 +3,7 @@
 ## Usage
 ### Mean of Pairwise Weighted Distances Using Great Circle
 This code takes a set of 2D data points ```X``` and calculates the mean of the pairwise weighted distances between points using the great circle metric.
+It offers extensive speedup over Python-only implementations, so it is useful when dealing with _very big data_.
 
 To call use:
 ``` python
@@ -35,5 +36,7 @@ For adding it permanently (so you do not have to do this this every time) add it
 There were  many attenpts, see: https://github.com/oliviaguest/pairwise_distance to make this work Python-only.
 Alas — none of them worked out, but feel free to play around with the various Python versions.
 The main stumbling block was the GIL.
+
+For very huge data sometimes Python-only is not the best idea.
 
 Can memory efficiency be improved even more? See: http://cython.readthedocs.io/en/latest/src/tutorial/numpy.html

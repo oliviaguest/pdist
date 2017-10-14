@@ -27,7 +27,7 @@ Run ```make```.
 Subsequently, run ```python compare.py``` to confirm compilaltion, and to see the comparison between using the C version and using a Python-only way.
 
 If you want to use this function from outside this directory, e.g., ```import```. I have not yet found a way of doing so without adding the path to the library to ```LD_LIBRARY_PATH```, e.g., ```export LD_LIBRARY_PATH=/local/path/to/this/repo```.
-For adding it permanently (so you do not have to do this this every time) add it to your ```~/.bashrc``` or whatever your set up dictates.
+For adding it permanently (so you do not have to do this this every time) add it to your ```~/.bashrc``` or whatever your set-up dictates.
 
 ## Notes
 There were  many attenpts, see: https://github.com/oliviaguest/pairwise_distance to make this work Python-only.

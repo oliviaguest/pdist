@@ -1,4 +1,5 @@
 # pdist
+Calculate the mean of the pairwise weighted distances between points using the great circle metric for a very big dataset without running out of RAM and/or waiting till the end of the universe.
 
 ## Usage
 ### Mean of Pairwise Weighted Distances Using Great Circle

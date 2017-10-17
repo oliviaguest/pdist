@@ -21,11 +21,10 @@ It also implements great circle, also known as orthodromic or geodesic, distance
 For an example of both functions see ```compare.py```.
 
 ## Information
-The C and Python code were written by Olivia Guest — using [this tutorial]( https://equatorialmaths.wordpress.com/2010/10/16/python-extensions-with-c-libraries-made-easy-by-cython/) by Dmitrii V Pasechnik to call C functions from Python using Cython, and using the [haversine function from Rosetta Code
-](https://rosettacode.org/wiki/Haversine_formula#C).
+The C and Python code were written by Olivia Guest — using [this tutorial]( https://equatorialmaths.wordpress.com/2010/10/16/python-extensions-with-c-libraries-made-easy-by-cython/) by Dmitrii V Pasechnik to call C functions from Python using Cython, and using the [haversine function](https://rosettacode.org/wiki/Haversine_formula#C) from Rosetta Code.
 
 ## Installation
-Make sure you have Cython and its dependencies installed.
+Make sure you have Cython and its dependencies installed (refer to ```requirements.txt```).
 Run ```make```.
 Subsequently, run ```python compare.py``` to confirm compilation, and to see the comparison between using the C version and using a Python-only way.
 See ```requirements.txt``` in case you need to install GeoPy, etc.

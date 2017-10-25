@@ -38,6 +38,7 @@ double calculate_mean_distances(int n,
   {
     N += weight[i];
   }
-  double N_unique_pairs = (((N - 1)*(N - 1) + (N + 1)) / 2.0 + N);
+	// double N_unique_pairs = (((N - 1)*(N - 1) + (N + 1)) / 2.0 + N);
+  double N_unique_pairs = N * (N - 1.0) / 2.0;
   return sum_dist / N_unique_pairs;
 }

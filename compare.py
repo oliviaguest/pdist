@@ -46,7 +46,8 @@ if __name__ == "__main__":
                for i in xrange(N - 1) for j in xrange(i + 1, N)]
     scipy_sum = np.sum(weights * Y)
     N = counts.sum()
-    scipy_mean = scipy_sum / (((N - 1)**2 + (N + 1)) / 2 + N)
+    N_unique_pairs = N * (N - 1.0) / 2.0
+    scipy_mean = scipy_sum / N_unique_pairs
     print('SciPy:\t\t{} s'.format(time() - t))
     ##########################################################################
 
@@ -58,13 +59,13 @@ if __name__ == "__main__":
 
     # There is minor rounding error, but check for equality:
     assert np.round(scipy_mean) == np.round(c_mean)
-    print('mean = {}'.format(c_mean))
+    print('Both:\tmean = {}'.format(c_mean))
 
     # Compary to GeoPy:
     X = [[0, 10], [4, 2]]
     t = time()
-    print(cdist(X[0], X[1]))
+    print('C:\t\tDistance = {} km'.format(cdist(X[0], X[1])))
     print('C:\t\t{} s'.format(time() - t))
     t = time()
-    print (great_circle(X[0], X[1]))
+    print('GeoPy:\t\tDistance = {}'.format(great_circle(X[0], X[1])))
     print('GeoPy:\t\t{} s'.format(time() - t))

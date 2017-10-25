@@ -5,13 +5,17 @@
 Cython == 0.24.1
 
 # compare.py: 14
+# tests/test.py: 11
 geopy == 1.11.0
 
 # compare.py: 10
+# tests/test.py: 7
 numpy == 1.11.3
 
 # compare.py: 8
+# tests/test.py: 6
 scikit_learn == 0.18.1
 
 # compare.py: 13
+# tests/test.py: 10
 scipy == 0.18.1

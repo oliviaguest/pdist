@@ -5,3 +5,5 @@ sudo: enabled
 install:
   - pip install -r requirements.txt
   - export LD_LIBRARY_PATH=$HOME/pdist:$LD_LIBRARY_PATH
+script:
+  - python tests/test.py

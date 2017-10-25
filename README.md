@@ -29,7 +29,7 @@ Run ```make```.
 Subsequently, run ```python compare.py``` to confirm compilation, and to see the comparison between using the C version and using a Python-only way.
 See ```requirements.txt``` in case you need to install GeoPy, etc.
 
-If you want to use this function from outside this directory, e.g., ```import```. I have not yet found a way of doing so without adding the path to the library to ```LD_LIBRARY_PATH```, e.g., ```export LD_LIBRARY_PATH=/local/path/to/this/repo```.
+If you want to use this function from outside this directory, e.g., ```import```, I have not yet found a way of doing so without adding the path to the library to ```LD_LIBRARY_PATH```, e.g., ```export LD_LIBRARY_PATH=/local/path/to/this/repo```.
 For adding it permanently (so you do not have to do this this every time) add it to your ```~/.bashrc``` or whatever your set-up dictates.
 
 ## Notes

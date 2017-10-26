@@ -1,11 +1,17 @@
 language: python
+
 python:
     - "2.7"
+
 sudo: enabled
+
 install:
   - pip install -r requirements.txt
-  - make
   - export LD_LIBRARY_PATH=$TRAVIS_BUILD_DIR:$LD_LIBRARY_PATH
+  - echo $LD_LIBRARY_PATH
+
+before_script:
+  - make
 
 script:
   - python ./tests/test.py

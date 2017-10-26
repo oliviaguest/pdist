@@ -16,5 +16,6 @@ before_script:
   - ls
 
 script:
+  - python setup.py build
   - make
   - python ./tests/test.py

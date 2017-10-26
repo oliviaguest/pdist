@@ -7,15 +7,11 @@ sudo: enabled
 
 install:
   - pip install -r requirements.txt
-  - make
 
 before_script:
   - python setup.py build
-  - make
   - export PATH=$PATH:$TRAVIS_BUILD_DIR
-  - echo $PATH
-  - ls
 
 script:
   - make
-  - make runpy
+  - make test

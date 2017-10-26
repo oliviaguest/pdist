@@ -24,7 +24,7 @@ pdist.so:	pdist.pyx setup.py cdist.c
 	python setup.py build_ext --inplace --rpath=.
 
 # running a Python test
-runpy:	pdist.so
+test:	pdist.so
 	PYTHONPATH=. python tests/test.py
 
 # the following is just for comparison

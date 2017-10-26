@@ -12,6 +12,7 @@ install:
 
 before_script:
   - make
+  - ls
 
 script:
   - python ./tests/test.py

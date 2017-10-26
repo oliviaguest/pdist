@@ -6,7 +6,7 @@ import unittest
 import sklearn.datasets
 import numpy as np
 
-from dist import cdist, c_mean_dist
+from pdist import cdist, c_mean_dist
 from scipy.spatial.distance import pdist
 from geopy.distance import great_circle
 
@@ -79,7 +79,7 @@ class TestPdist(unittest.TestCase):
         self.assertTrue(np.isclose(c_mean, scipy_mean))
 
     def test_dist_itslef(self):
-        """Compary cidst to GeoPy."""
+        """Compary cdist to GeoPy."""
         X = [[0, 10], [4, 2]]  # Just some points. I've no idea where on globe.
         c = cdist(X[0], X[1])
         string_geopy = '{}'.format(great_circle(X[0], X[1]))

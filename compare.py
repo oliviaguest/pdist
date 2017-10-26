@@ -2,8 +2,7 @@
 
 from __future__ import division, print_function
 
-from dist import c_mean_dist
-from dist import cdist
+from pdist import c_mean_dist, cdist
 
 import sklearn.datasets
 

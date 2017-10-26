@@ -10,7 +10,7 @@ LFLAGS = -L. -Wl,-rpath=. -lcmean
 # the following might be .out, or .exe, or still something esle, but usually empty...
 EXE=
 
-all:	dist.so
+all:	pdist.so
 
 install:
 	python setup.py install
@@ -20,11 +20,11 @@ install:
 #	$(CC) $(CFLAGS) -fPIC -shared cdist.c -o libcdist.so
 
 # building python extension calling a function from shared C library
-dist.so:	cython_dist.pyx setup.py cdist.c
+pdist.so:	pdist.pyx setup.py cdist.c
 	python setup.py build_ext --inplace --rpath=.
 
 # running a Python test
-runpy:	dist.so
+runpy:	pdist.so
 	PYTHONPATH=. python tests/test.py
 
 # the following is just for comparison

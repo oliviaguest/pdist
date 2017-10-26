@@ -10,12 +10,12 @@ install:
   - make
 
 before_script:
+  - python setup.py build
+  - make
   - export PATH=$PATH:$TRAVIS_BUILD_DIR
   - echo $PATH
-  - make
   - ls
 
 script:
-  - python setup.py build
   - make
   - python ./tests/test.py

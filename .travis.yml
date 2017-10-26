@@ -7,10 +7,11 @@ sudo: enabled
 
 install:
   - pip install -r requirements.txt
-  - export LD_LIBRARY_PATH=$TRAVIS_BUILD_DIR:$LD_LIBRARY_PATH
-  - echo $LD_LIBRARY_PATH
+
 
 before_script:
+  - export LD_LIBRARY_PATH=$TRAVIS_BUILD_DIR:$LD_LIBRARY_PATH
+  - echo $LD_LIBRARY_PATH
   - make
   - ls
 

@@ -22,7 +22,7 @@ dist.so:	cython_dist.pyx libcdist.so setup.py
 
 # running a Python test
 runpy:	dist.so
-	python test.py
+	PYTHONPATH=. python tests/test.py
 
 # the following is just for comparison
 # buiding a C test calling a function from C library

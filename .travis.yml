@@ -18,4 +18,4 @@ before_script:
 
 script:
   - make
-  - python tests/test.py
+  - make runpy

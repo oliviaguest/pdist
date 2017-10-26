@@ -12,12 +12,15 @@ EXE=
 
 all:	dist.so
 
+install:
+	python setup.py install
+
 # building a shared C library libcmean.so
-libcdist.so: cdist.c
-	$(CC) $(CFLAGS) -fPIC -shared cdist.c -o libcdist.so
+#libcdist.so: cdist.c
+#	$(CC) $(CFLAGS) -fPIC -shared cdist.c -o libcdist.so
 
 # building python extension calling a function from shared C library
-dist.so:	cython_dist.pyx libcdist.so setup.py
+dist.so:	cython_dist.pyx setup.py cdist.c
 	python setup.py build_ext --inplace --rpath=.
 
 # running a Python test

@@ -10,8 +10,8 @@ install:
 
 
 before_script:
-  - export LD_LIBRARY_PATH=$TRAVIS_BUILD_DIR:$LD_LIBRARY_PATH
-  - echo $LD_LIBRARY_PATH
+  - export PATH=$TRAVIS_BUILD_DIR:$PATH
+  - echo $PATH
   - make
   - ls
 

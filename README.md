@@ -39,3 +39,8 @@ There were [many attenpts](https://github.com/oliviaguest/pairwise_distance) :di
 Alas — none of them worked out, but feel free to play around with the various Python versions.
 The main stumbling block was the GIL. :cry:
 For very huge data sometimes Python-only is not the best idea. :grimacing:
+
+## To Do
+
+* Fill in the ```setup.py``` (template: https://github.com/uwescience/shablona/blob/master/setup.py)
+* Submit to pypi (https://github.com/oliviaguest/pdist/pull/2#issuecomment-339713987)

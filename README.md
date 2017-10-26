@@ -1,4 +1,6 @@
 # pdist
+[![Build Status](https://travis-ci.org/oliviaguest/pdist.svg?branch=master)](https://travis-ci.org/oliviaguest/pdist)
+
 Calculate the mean of the pairwise weighted distances between points using the great circle metric for a very big dataset without running out of RAM and/or waiting till the end of the universe.
 
 ## Usage
@@ -33,10 +35,8 @@ If you want to use this function from outside this directory, e.g., ```import```
 For adding it permanently (so you do not have to do this every time) add it to your ```~/.bashrc``` or whatever your set-up dictates.
 
 ## Notes
-There were  many attenpts, see: https://github.com/oliviaguest/pairwise_distance to make this work Python-only.
+There were  [many attenpts](https://github.com/oliviaguest/pairwise_distance) to make this work Python-only.
 Alas — none of them worked out, but feel free to play around with the various Python versions.
 The main stumbling block was the GIL.
 
 For very huge data sometimes Python-only is not the best idea.
-
-Can memory efficiency be improved even more? See: http://cython.readthedocs.io/en/latest/src/tutorial/numpy.html

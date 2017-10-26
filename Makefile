@@ -12,6 +12,9 @@ EXE=
 
 all:	dist.so
 
+install:
+	python setup.py install
+
 # building a shared C library libcmean.so
 #libcdist.so: cdist.c
 #	$(CC) $(CFLAGS) -fPIC -shared cdist.c -o libcdist.so

@@ -1,5 +1,9 @@
 # pdist
-[![Build Status](https://travis-ci.org/oliviaguest/pdist.svg?branch=master)](https://travis-ci.org/oliviaguest/pdist) <a href="https://twitter.com/intent/follow?screen_name=o_guest">
+
+
+[![Build Status](https://travis-ci.org/oliviaguest/pdist.svg?branch=master)](https://travis-ci.org/oliviaguest/pdist)
+[![license](https://img.shields.io/badge/license-CC0-lightgrey.svg)](https://github.com/oliviaguest/pdist/blob/master/LICENSE)
+<a href="https://twitter.com/intent/follow?screen_name=o_guest">
         <img src="https://img.shields.io/twitter/follow/o_guest.svg?style=social"
             alt="follow on Twitter"></a>
 

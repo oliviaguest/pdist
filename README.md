@@ -1,5 +1,7 @@
 # pdist
-[![Build Status](https://travis-ci.org/oliviaguest/pdist.svg?branch=master)](https://travis-ci.org/oliviaguest/pdist)
+[![Build Status](https://travis-ci.org/oliviaguest/pdist.svg?branch=master)](https://travis-ci.org/oliviaguest/pdist) <a href="https://twitter.com/intent/follow?screen_name=o_guest">
+        <img src="https://img.shields.io/twitter/follow/o_guest.svg?style=social"
+            alt="follow on Twitter"></a>
 
 Calculate the mean of the pairwise weighted distances between points using the great circle metric :globe_with_meridians: for a very big dataset without running out of RAM :bomb: and/or waiting till the end of the universe. :joy:
 

@@ -6,6 +6,7 @@ python:
 sudo: enabled
 
 install:
+  - pip install codecov
   - pip install -r requirements.txt
 
 before_script:
@@ -15,3 +16,6 @@ before_script:
 script:
   - make
   - make test
+  
+after_success:
+  - codecov

@@ -2,6 +2,7 @@
 
 
 [![Build Status](https://travis-ci.org/oliviaguest/pdist.svg?branch=master)](https://travis-ci.org/oliviaguest/pdist)
+[![codecov](https://codecov.io/gh/oliviaguest/pdist/branch/master/graph/badge.svg)](https://codecov.io/gh/oliviaguest/pdist)
 [![license](https://img.shields.io/badge/license-CC0-lightgrey.svg)](https://github.com/oliviaguest/pdist/blob/master/LICENSE)
 <a href="https://twitter.com/intent/follow?screen_name=o_guest">
         <img src="https://img.shields.io/twitter/follow/o_guest.svg?style=social"

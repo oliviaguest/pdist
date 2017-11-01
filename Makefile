@@ -25,8 +25,8 @@ pdist.so:	pdist.pyx setup.py cdist.c
 
 # running a Python test
 test:	pdist.so
-	PYTHONPATH=. python tests/test.py
-
+#	PYTHONPATH=. python tests/test.py
+	PYTHONPATH=. coverage run tests/test.py
 # the following is just for comparison
 # buiding a C test calling a function from C library
 dync: main.c libcdist.so

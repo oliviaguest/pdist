@@ -1,3 +1,6 @@
+# Cython file
+cython_dist.c
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

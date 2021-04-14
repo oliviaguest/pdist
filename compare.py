@@ -42,7 +42,7 @@ if __name__ == "__main__":
     t = time()
     Y = pdist(X, metric=cdist)
     weights = [counts[i] * counts[j]
-               for i in xrange(N - 1) for j in xrange(i + 1, N)]
+               for i in range(N - 1) for j in range(i + 1, N)]
     scipy_sum = np.sum(weights * Y)
     N = counts.sum()
     N_unique_pairs = N * (N - 1.0) / 2.0

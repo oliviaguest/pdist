@@ -10,7 +10,7 @@ geopy == 1.11.0
 
 # compare.py: 10
 # tests/test.py: 7
-numpy == 1.11.3
+numpy == 1.21.0
 
 # compare.py: 8
 # tests/test.py: 6

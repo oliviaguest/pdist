@@ -18,4 +18,4 @@ scikit_learn == 0.18.1
 
 # compare.py: 13
 # tests/test.py: 10
-scipy == 0.18.1
+scipy == 1.10.0
